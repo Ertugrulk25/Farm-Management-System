@@ -51,7 +51,8 @@ do {
 }
 
 public static void cowOperationMenu(CowService cowService){
-
+boolean exit = false;
+while (exit){
     System.out.println("*************** COW OPERATIONS **************");
     System.out.println("1. Add a new Cow ");
     System.out.println("2. Find Cow by ID: ");
@@ -64,45 +65,48 @@ public static void cowOperationMenu(CowService cowService){
     int choice = scanner.nextInt();
     scanner.nextLine();
 
-    switch (choice){
+    switch (choice) {
 
-        case 1 :
+        case 1:
             cowService.saveCow();
             break;
-        case 2 :
+        case 2:
             System.out.println("Please Enter Cow ID: ");
-           Integer findId =  scanner.nextInt();
-           scanner.nextLine();
-           cowService.findCowById(findId);
+            Integer findId = scanner.nextInt();
+            scanner.nextLine();
+            cowService.findCowById(findId);
             break;
-        case 3 :
+        case 3:
             System.out.println("Enter Cow ID: ");
             Integer deleteId = scanner.nextInt();
             scanner.nextLine();
             cowService.deleteCowById(deleteId);
             break;
-        case 4 :
+        case 4:
 
             cowService.findAllCows();
             break;
-        case 5 :
+        case 5:
 
             break;
-        case 0 :
+        case 0:
             break;
-
 
     }
+    }
+}
+public static void sheepOperationMenu(SheepService sheepService){
+boolean exit = false;
+while (exit) {
+    System.out.println("*************** SHEEP OPERATIONS **************");
+    System.out.println("1. Add a new Sheep ");
+    System.out.println("2. Find Sheep by ID: ");
+    System.out.println("3. Delete Sheep by ID: ");
+    System.out.println("4. Find all Sheep:  ");
+    System.out.println("5. Update Sheep by ID: :  ");
+    System.out.println("0. Return to main menu : ");
+    System.out.println("Enter your choice: ");
 
-
-
-
-
-
-
-
-
-
-
+}
 }
 }

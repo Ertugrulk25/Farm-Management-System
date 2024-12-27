@@ -1,6 +1,7 @@
 package com.ert.farmManagementSystem.service;
 
 import com.ert.farmManagementSystem.domain.Cow;
+import com.ert.farmManagementSystem.domain.VaccineInformation;
 import com.ert.farmManagementSystem.exception.CowNotFoundEXception;
 import com.ert.farmManagementSystem.repository.CowRepository;
 
@@ -32,8 +33,21 @@ public class CowService {
 
         System.out.println("Enter Cow death date: ");
         String deathDate = scanner.nextLine();
-        cow.setDeathDate(LocalDate.parse(deathDate));
+        if (deathDate != null && !deathDate.isBlank()) {
+            cow.setDeathDate(LocalDate.parse(deathDate));
+        }else {
+
+            cow.setDeathDate(null);
+        }
+
+        VaccineInformation vaccineInformation = new VaccineInformation();
+        System.out.println("Enter the Vaccine name ");
+        vaccineInformation.setVaccineName(scanner.nextLine());
+        System.out.println("Enter the vaccination date ");
+        String vaccineDate = scanner.nextLine();
+        vaccineInformation.setVaccineDate(LocalDate.parse(vaccineDate));
         // ÖLÜM TARİHİ BOŞ GİRME
+        cow.setVaccineInformation(vaccineInformation);
         cowRepository.save(cow);
         System.out.println("Cow is saved successfully. Cow ID: "+ cow.getId());
 
