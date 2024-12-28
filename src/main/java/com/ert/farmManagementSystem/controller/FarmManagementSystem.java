@@ -1,5 +1,6 @@
 package com.ert.farmManagementSystem.controller;
 
+import com.ert.farmManagementSystem.config.HibernateUtils;
 import com.ert.farmManagementSystem.repository.CowRepository;
 import com.ert.farmManagementSystem.repository.SheepRepository;
 import com.ert.farmManagementSystem.service.CowService;
@@ -40,8 +41,10 @@ do {
             //sheep
 
             break;
-        case 3 :
+        case 0 :
             // exıt
+            System.out.println("Good Bye... ");
+            HibernateUtils.shutDown();
             break;
         default:
             System.out.println("Invalid Choice, Please Try Again...");
@@ -52,7 +55,7 @@ do {
 
 public static void cowOperationMenu(CowService cowService){
 boolean exit = false;
-while (exit){
+do {
     System.out.println("*************** COW OPERATIONS **************");
     System.out.println("1. Add a new Cow ");
     System.out.println("2. Find Cow by ID: ");
@@ -83,21 +86,28 @@ while (exit){
             cowService.deleteCowById(deleteId);
             break;
         case 4:
-
             cowService.findAllCows();
             break;
         case 5:
-
+            System.out.println("Enter Cow ID: ");
+            Integer updateWithId = scanner.nextInt();
+            scanner.nextLine();
+            cowService.updateCowById(updateWithId);
             break;
         case 0:
+            exit = true;
+            System.out.println("Returning to Main Menu.. ");
+            break;
+        default:
+            System.out.println("Invalid choice,Please Try Again...");
             break;
 
     }
-    }
+    }while (exit = true);
 }
 public static void sheepOperationMenu(SheepService sheepService){
 boolean exit = false;
-while (exit) {
+while (!exit) {
     System.out.println("*************** SHEEP OPERATIONS **************");
     System.out.println("1. Add a new Sheep ");
     System.out.println("2. Find Sheep by ID: ");

@@ -70,5 +70,20 @@ public class CowRepository {
         }
 return null;
     }
-}
 
+    public void update(Cow foundCow) {
+
+        try {
+            session = HibernateUtils.getSessionFactory().openSession();
+            Transaction trs = session.beginTransaction();
+
+            session.update(foundCow);
+
+            trs.commit();
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }finally {
+            HibernateUtils.closeSession(session);
+        }
+    }
+}
