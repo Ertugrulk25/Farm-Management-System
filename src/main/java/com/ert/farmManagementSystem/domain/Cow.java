@@ -18,18 +18,17 @@ public class Cow {
 
     private LocalDate deathDate;
 
-    @Embedded
-    private VaccineInformation vaccineInformation;
+
 
     public Cow() {
     }
 
-    public Cow(Integer id, String breed, LocalDate dateOfBirth, LocalDate deathDate, VaccineInformation vaccineInformation) {
+    public Cow(Integer id, String breed, LocalDate dateOfBirth, LocalDate deathDate) {
         this.id = id;
         this.breed = breed;
         this.dateOfBirth = dateOfBirth;
         this.deathDate = deathDate;
-        this.vaccineInformation = vaccineInformation;
+
     }
 
     public Integer getId() {
@@ -64,13 +63,7 @@ public class Cow {
         this.deathDate = deathDate;
     }
 
-    public VaccineInformation getVaccineInformation() {
-        return vaccineInformation;
-    }
 
-    public void setVaccineInformation(VaccineInformation vaccineInformation) {
-        this.vaccineInformation = vaccineInformation;
-    }
 
     @Override
     public String toString() {
@@ -78,8 +71,7 @@ public class Cow {
                 "id=" + id +
                 ", breed='" + breed + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
-                ", deathDate=" + deathDate +
-                ", vaccineInformation=" + vaccineInformation +
+                ", deathDate=" + deathDate  +
                 '}';
     }
 }

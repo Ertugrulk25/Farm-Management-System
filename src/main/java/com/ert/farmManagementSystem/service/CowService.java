@@ -1,7 +1,6 @@
 package com.ert.farmManagementSystem.service;
 
 import com.ert.farmManagementSystem.domain.Cow;
-import com.ert.farmManagementSystem.domain.VaccineInformation;
 import com.ert.farmManagementSystem.exception.CowNotFoundEXception;
 import com.ert.farmManagementSystem.repository.CowRepository;
 
@@ -35,110 +34,88 @@ public class CowService {
         String deathDate = scanner.nextLine();
         if (deathDate != null && !deathDate.isBlank()) {
             cow.setDeathDate(LocalDate.parse(deathDate));
-        }else {
+        } else {
 
             cow.setDeathDate(null);
         }
-        VaccineInformation vaccineInformation = new VaccineInformation();
-        System.out.println("Enter the Vaccine name ");
-        vaccineInformation.setVaccineName(scanner.nextLine());
-        System.out.println("Enter the vaccination date ");
-        String vaccineDate = scanner.nextLine();
-        vaccineInformation.setVaccineDate(LocalDate.parse(vaccineDate));
-        cow.setVaccineInformation(vaccineInformation);
-        cowRepository.save(cow);
-        System.out.println("Cow is saved successfully. Cow ID: "+ cow.getId());
-
+cowRepository.save(cow);
 
     }
 
     public Cow findCowById(Integer id) {
-   Cow foundCow = cowRepository.findById(id);
-   try {
-       if (foundCow != null) {
+        Cow foundCow = cowRepository.findById(id);
+        try {
+            if (foundCow != null) {
 
-           System.out.println(foundCow);
+                System.out.println(foundCow);
 
-return foundCow;
-       } else {
-           throw new CowNotFoundEXception("Cow not found by ID: ");
-       }
-   }catch (CowNotFoundEXception e){
-       System.out.println(e.getMessage());
-   }
+                return foundCow;
+            } else {
+                throw new CowNotFoundEXception("Cow not found by ID: ");
+            }
+        } catch (CowNotFoundEXception e) {
+            System.out.println(e.getMessage());
+        }
 
         return null;
     }
 
     public void deleteCowById(Integer deleteId) {
 
-    Cow deleteCow = findCowById(deleteId);
+        Cow deleteCow = findCowById(deleteId);
 
-    if (deleteCow!= null){
-        System.out.println(deleteCow);
-        cowRepository.delete(deleteCow);
-        System.out.println("Cow is deleted ");
-    }else {
-        System.out.println("Cow id is not found ");
-    }
+        if (deleteCow != null) {
+            System.out.println(deleteCow);
+            cowRepository.delete(deleteCow);
+            System.out.println("Cow is deleted ");
+        } else {
+            System.out.println("Cow id is not found ");
+        }
     }
 
     public void findAllCows() {
         List<Cow> cows = cowRepository.findAll();
-        if (cows.isEmpty()){
+        if (cows.isEmpty()) {
             System.out.println("Cows list is EMPTY !!!");
-        }else {
+        } else {
             System.out.println("------------ ALL COWS ------------");
-            for (Cow cow :cows){
+            for (Cow cow : cows) {
                 System.out.println(cow);
             }
             System.out.println("------------ALL COWS ----------------");
         }
 
 
-
     }
 
-//    public void updateCowById(Integer updateWithId) {
-//
-//        Cow  foundCow = findCowById(updateWithId);
-//        Cow cow = new Cow();
-//        VaccineInformation vaccineInformation = new VaccineInformation();
-//        if (foundCow != null) {
-//            System.out.println("Enter the new cow  id: ");
-//            Integer id = scanner.nextInt();
-//            scanner.nextLine();
-//            System.out.println("Enter the new cow breed");
-//            String breed = scanner.nextLine();
-//            System.out.println("Enter new date birth");
-//            String newBirthDate = scanner.nextLine();
-//            cow.setDateOfBirth(LocalDate.parse(newBirthDate));
-//            System.out.println("Enter new death date");
-//            String newDeathDate = scanner.nextLine();
-//            if (newDeathDate != null && !newDeathDate.isBlank()) {
-//                cow.setDeathDate(LocalDate.parse(newDeathDate));
-//            }else {
-//
-//                cow.setDeathDate(null);
-//            }
-//            System.out.println("Enter new vaccine name");
-//            String newVaccineName = scanner.nextLine();
-//            System.out.println("Enter new vaccine date");
-//            String newWaccineDate = scanner.nextLine();
-//            vaccineInformation.setVaccineDate(LocalDate.parse(newWaccineDate));
-//            cow.setVaccineInformation(vaccineInformation);
-//
-//                foundCow.setId(id);
-//                foundCow.setBreed(breed);
-////                foundCow.setDateOfBirth(newBirthDate);
-////                foundCow.setDeathDate(newDeathDate);
-////            vaccineInformation.setVaccineName(newVaccineName);
-////                foundCow.setVaccineInformation(vaccineInformation);
-//                cowRepository.update(foundCow);
-//                cowRepository.update(cow);
-//                cowRepository.update(vaccineInformation);
-//
-//        } else {
-//            System.out.println("Update operation is canceled!!! ");
+    public void updateCowById(Integer updateWithId) {
+
+        Cow foundCow = findCowById(updateWithId);
+
+        if (foundCow != null) {
+
+            System.out.println("Enter the new cow breed");
+            String breed = scanner.nextLine();
+            System.out.println("Enter new date birth");
+            String newBirthDate = scanner.nextLine();
+            foundCow.setDateOfBirth(LocalDate.parse(newBirthDate));
+            System.out.println("Enter new death date");
+            String newDeathDate = scanner.nextLine();
+            foundCow.setDeathDate(LocalDate.parse(newDeathDate));
+
+
+
+
+            foundCow.setBreed(breed);
+            foundCow.setDateOfBirth(LocalDate.parse(newBirthDate));
+            foundCow.setDeathDate(LocalDate.parse(newDeathDate));
+
+            cowRepository.update(foundCow);
+
+
+        } else {
+            System.out.println("Update operation is canceled!!! ");
         }
 
+    }
+}

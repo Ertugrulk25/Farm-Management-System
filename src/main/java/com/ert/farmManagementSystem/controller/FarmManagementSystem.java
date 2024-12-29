@@ -17,7 +17,7 @@ public static void displayFarmManagementSystem() {
     CowService cowService = new CowService(cowRepository);
 
     SheepRepository sheepRepository = new SheepRepository();
-    SheepService sheepService = new SheepService();
+    SheepService sheepService = new SheepService(sheepRepository);
 
 
     int choice;
@@ -39,7 +39,7 @@ do {
             break;
         case 2 :
             //sheep
-
+        sheepOperationMenu(sheepService);
             break;
         case 0 :
             // exıt
@@ -116,7 +116,48 @@ while (!exit) {
     System.out.println("5. Update Sheep by ID: :  ");
     System.out.println("0. Return to main menu : ");
     System.out.println("Enter your choice: ");
+    int choice = scanner.nextInt();
+    scanner.nextLine();
+
+    switch (choice) {
+
+        case 1:
+            sheepService.saveCow();
+            break;
+        case 2:
+            System.out.println("Please Enter Cow ID: ");
+            Integer findId = scanner.nextInt();
+            scanner.nextLine();
+            sheepService.findSheepById(findId);
+            break;
+        case 3:
+            System.out.println("Enter Cow ID: ");
+            Integer deleteId = scanner.nextInt();
+            scanner.nextLine();
+            sheepService.deleteSheepById(deleteId);
+            break;
+        case 4:
+            sheepService.findAllSheep();
+            break;
+        case 5:
+            System.out.println("Enter Cow ID: ");
+            Integer updateWithId = scanner.nextInt();
+            scanner.nextLine();
+            sheepService.updateSheepById(updateWithId);
+            break;
+        case 0:
+            exit = true;
+            System.out.println("Returning to Main Menu.. ");
+            break;
+        default:
+            System.out.println("Invalid choice,Please Try Again...");
+            break;
+
+    }
+}while (exit = true);
+}
+
 
 }
-}
-}
+
+
